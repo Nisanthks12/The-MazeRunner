@@ -347,7 +347,6 @@ object Maze {
           new GridLocation(23,23),
           new GridLocation(24,23)
         )
-
         startingLocation = new GridLocation(0, 4)
 
       }

@@ -1,7 +1,17 @@
 package M.model
 
-import akka.actor.{Actor, ActorRef, PoisonPill, Props}
+import akka.actor.{Actor, ActorRef}
 import M.model.engine.EngineVec
+
+case object UpdateGame
+case class AddRunner(username: String)
+case class RemoveRunner(username: String)
+case class MoveRunner(username: String, x: Double, y:Double)
+case class StopRunner(username: String)
+case class LoadMaze(levelNumber: Int)
+
+case object SendGameState
+case class GameState(gameState: String)
 
 
 class GameActor extends Actor {
