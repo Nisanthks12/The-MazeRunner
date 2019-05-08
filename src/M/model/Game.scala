@@ -9,7 +9,6 @@ class Game {
 
   val arena: Arena = new Arena(10)
   var walls: List[Wall] = List()
-  var homeHealth = 10
   var maze: Maze = new Maze()
   var runners: Map[String, Runner] = Map()
   val runnerSize: Double = 0.3
@@ -22,7 +21,7 @@ class Game {
     blockTile(0, 0, maze.gridWidth, maze.gridHeight)
     maze.wallLocations.foreach(wall => placeWall(wall.x, wall.y))
     runners.values.foreach(runner => runner.location = startingVector())
-    homeHealth = maze.maxHomeHealth
+
   }
 
   def addRunner(id: String): Unit = {
@@ -70,8 +69,6 @@ class Game {
       "gridSize" -> Json.toJson(Map("x" -> maze.gridWidth, "y" -> maze.gridHeight)),
       "start" -> Json.toJson(Map("x" -> maze.startingLocation.x, "y" -> maze.startingLocation.y)),
       "home" -> Json.toJson(Map("x" -> maze.home.x, "y" -> maze.home.y)),
-      "homeHealth" -> Json.toJson(homeHealth),
-      "maxHomeHealth" -> Json.toJson(maze.maxHomeHealth),
       "walls" -> Json.toJson(this.walls.map({ w => Json.toJson(Map("x" -> w.x, "y" -> w.y)) })),
       "runners" -> Json.toJson(this.runners.map({ case (k, v) => Json.toJson(Map(
         "x" -> Json.toJson(v.location.x),

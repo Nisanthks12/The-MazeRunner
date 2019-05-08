@@ -361,6 +361,6 @@ class Maze {
   var gridHeight: Int = 25
   var startingLocation = new GridLocation(0, 3)
   var home = new GridLocation(12, 12)
-  var maxHomeHealth = 2
+
 
 }

@@ -23,13 +23,8 @@ class GameActor extends Actor {
     case message: MoveRunner => game.runners(message.username).move(new EngineVec(message.x, message.y))
     case message: StopRunner => game.runners(message.username).stop()
 
-    case UpdateGame =>
-      game.update()
-      if (game.homeHealth <= 0) {
-        game.homeHealth = 2
-        mazeNumber = (mazeNumber + 1) % 3
-        loadMaze(mazeNumber)
-      }
+    case UpdateGame => game.update()
+
     case SendGameState => sender() ! GameState(game.gameState())
   }
 }

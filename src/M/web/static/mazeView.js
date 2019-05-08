@@ -15,10 +15,7 @@ function parseGameState(event) {
 
     placeSquare(gameState['start']['x'], gameState['start']['y'], 'red');
 
-    const health = gameState['homeHealth'];
-    const maxHealth = gameState['maxHomeHealth'];
-    const percentHealth = health / maxHealth;
-    const color = rgb(percentHealth * 255, percentHealth * 255, 0);
+    const color = 'black';
 
     placeSquare(gameState['home']['x'], gameState['home']['y'], color);
 
@@ -30,16 +27,6 @@ function parseGameState(event) {
         placeSquare(wall['x'], wall['y'], '#7B2918');
     }
 
-}
-
-function cleanInt(input) {
-    const value = Math.round(input);
-    const asString = value.toString(16);
-    return value > 15 ? asString : "0" + asString;
-}
-
-function rgb(r, g, b) {
-    return "#" + cleanInt(r) + cleanInt(g) + cleanInt(b);
 }
 
 
@@ -65,19 +52,15 @@ function drawGameBoard(gridSize) {
         context.moveTo(j * tileSize, 0);
         context.lineTo(j * tileSize, gridHeight * tileSize);
         context.stroke();
-
-
     }
     for (let k = 0; k <= gridHeight; k++) {
         context.beginPath();
         context.moveTo(0, k * tileSize);
         context.lineTo(gridWidth * tileSize, k * tileSize);
         context.stroke();
-
     }
 
 }
-
 
 function placeSquare(x, y, color) {
     context.fillStyle = color;
