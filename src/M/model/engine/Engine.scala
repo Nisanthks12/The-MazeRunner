@@ -33,7 +33,7 @@ object Engine {
   def slope(p1: EngineVec, p2: EngineVec): Double = {
     if(p2.x - p1.x == 0.0){
       100000000000.0
-//      Double.PositiveInfinity
+
     }else {
       (p2.y - p1.y) / (p2.x - p1.x)
     }
@@ -48,7 +48,7 @@ object Engine {
     if(obj.location.x == potentialLocation.x && obj.location.y == potentialLocation.y){
       return false
     }
-    // only in x/y direction
+
     val mObj = slope(obj.location, potentialLocation)
     val bObj = yIntercept(obj.location, mObj)
 
@@ -57,11 +57,6 @@ object Engine {
     if (equalDoubles(mObj, mBound)) {
       return false
     }
-
-    //    m1x + b1 = m2x + b2
-    //    m1x - m2x = b2 - b1
-    //    x(m1x - m2) = b2 - b1
-    //    x = (b2 - b1) / (m1x - m2)
 
     val ix: Double = (bBound - bObj) / (mObj - mBound)
     val iy: Double = ix * mObj + bObj
@@ -87,13 +82,13 @@ object Engine {
   def updateWorld(world: Arena, deltaTime: Double): Unit = {
 
     for (obj <- world.objects) {
-      // update velocity
+
       updateVelocity(obj, world, deltaTime)
 
-      // get potential location
+
       val potentialLocation = computePotentialLocation(obj, deltaTime)
 
-      // check collisions
+
       var collisionDetected = false
       for (wall <- world.boundaries) {
         if (detectCollision(obj, potentialLocation, wall)) {
